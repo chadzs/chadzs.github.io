@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doodle Portfolio | Dev & Security</title>
+    <!-- Importing a "Handwritten" font from Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --ink: #333333;
+            --paper: #fdfdfd;
+            --accent: #ff4757;
+            --line: #e0e0e0;
+        }
+
+        body {
+            background-color: #f4f1ea;
+            /* Creating the Lined Paper Effect */
+            background-image: linear-gradient(var(--line) 1px, transparent 1px);
+            background-size: 100% 30px;
+            font-family: 'Short Stack', cursive;
+            color: var(--ink);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+        }
+
+        /* Margin line on the left like a notebook */
+        .container::before {
+            content: "";
+            position: absolute;
+            left: -20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 0, 0, 0.2);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            border-bottom: 4px wavy var(--accent);
+        }
+
+        .section {
+            background: var(--paper);
+            padding: 30px;
+            margin-bottom: 40px;
+            /* Hand-drawn irregular border */
+            border: 3px solid var(--ink);
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            transform: scale(1.01) rotate(-0.5deg);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            margin-top: 0;
+            text-decoration: underline;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            border: 2px solid var(--ink);
+            padding: 5px 15px;
+            margin: 5px;
+            border-radius: 50% 20% 50% 20%;
+        }
+
+        .btn {
+            background: transparent;
+            border: 2px solid var(--ink);
+            padding: 10px 25px;
+            font-family: 'Short Stack', cursive;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            border-radius: 10px 100px / 100px 10px;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #eee;
+        }
+
+        /* Simple doodle animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .doodle-icon {
+            font-size: 2rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>My Sketchbook <span class="doodle-icon">✏️</span></h1>
+            <p>Cyber Security | Web Dev | Unity Creator</p>
+        </header>
+
+        <!-- Cyber Security Section -->
+        <section class="section" id="cyber">
+            <h2>🛡️ Cyber Security</h2>
+            <p>I break things (ethically) to learn how to fix them. Focused on penetration testing and network defense.</p>
+            <div class="skill-tag">Nmap</div>
+            <div class="skill-tag">Wireshark</div>
+            <div class="skill-tag">Metasploit</div>
+            <br>
+            <button class="btn" onclick="alert('Viewing Security Logs...')">Read Writeups</button>
+        </section>
+
+        <!-- Web Dev Section -->
+        <section class="section" id="web">
+            <h2>🌐 Web Development</h2>
+            <p>Crafting interactive experiences with modern code and sketchy designs.</p>
+            <div class="skill-tag">React</div>
+            <div class="skill-tag">Node.js</div>
+            <div class="skill-tag">PostgreSQL</div>
+            <br>
+            <button class="btn" onclick="location.href='https://github.com'">See My Code</button>
+        </section>
+
+        <!-- Unity Section -->
+        <section class="section" id="unity">
+            <h2>🎮 Unity Game Dev</h2>
+            <p>Building 3D worlds and physics-based logic in C#.</p>
+            <div class="skill-tag">C#</div>
+            <div class="skill-tag">HLSL Shaders</div>
+            <div class="skill-tag">Blender</div>
+            <br>
+            <button class="btn">Play Demo</button>
+        </section>
+
+        <footer style="text-align: center; opacity: 0.6; margin-top: 100px;">
+            <p>Hand-coded with ☕ and ink.</p>
+        </footer>
+    </div>
+
+    <!-- --- JAVASCRIPT --- -->
+    <script>
+        // 1. Give each section a random slight rotation for that "scattered paper" look
+        document.querySelectorAll('.section').forEach(card => {
+            const randomRotation = (Math.random() * 3 - 1.5).toFixed(2);
+            card.style.transform = `rotate(${randomRotation}deg)`;
+        });
+
+        // 2. Add a "doodle" effect on click (pencil spark)
+        document.addEventListener('click', (e) => {
+            const spark = document.createElement('div');
+            spark.innerHTML = '✨';
+            spark.style.position = 'absolute';
+            spark.style.left = e.pageX + 'px';
+            spark.style.top = e.pageY + 'px';
+            spark.style.pointerEvents = 'none';
+            spark.style.fontSize = '20px';
+            document.body.appendChild(spark);
+
+            setTimeout(() => {
+                spark.remove();
+            }, 500);
+        });
+
+        console.log("Welcome to the Doodle Portfolio! Don't forget to check the console for hidden notes.");
+    </script>
+</body>
+                                                         </html>
+
